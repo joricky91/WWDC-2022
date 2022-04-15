@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showPage = false
+    
     var body: some View {
         VStack {
             Image("foodIcon")
@@ -16,16 +18,19 @@ struct ContentView: View {
             Text("This is a dictionary made to give information about Indonesia's street food.")
                 .font(.system(size: 30))
                 .multilineTextAlignment(.center)
-                .frame(minWidth: 700, idealWidth: 800, maxWidth: 900)
+                .padding(.horizontal, 20)
                 .padding(.bottom, 30)
             
             Button("Start"){
-                print("Button tapped")
+                self.showPage.toggle()
+            }.sheet(isPresented: $showPage){
+                DictionaryView()
             }
             .font(.title)
             .foregroundColor(Color.black)
             .padding(EdgeInsets(top: 20, leading: 90, bottom: 20, trailing: 90))
             .background(Color("buttonColor"))
+            .border(Color("textColor"), width: 6)
             .cornerRadius(15)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -16,7 +16,7 @@ struct DictionaryView: View {
     }
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 Text(food.name)
                     .font(.system(size: 82))
@@ -78,7 +78,8 @@ struct DictionaryView: View {
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 1)
         .background(Color("gorenganColor"))
     }
 }

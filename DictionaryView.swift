@@ -8,47 +8,75 @@
 import Foundation
 import SwiftUI
 
-var foodIndex = 0
-
 struct DictionaryView: View {
+    @State private var foodIndex = 0
+    
+    var food: FoodModel {
+        foodArr[foodIndex]
+    }
+    
     var body: some View {
         VStack {
-            Text(foodArr[foodIndex].name)
+            Text(food.name)
                 .font(.system(size: 82))
                 .fontWeight(.semibold)
                 .padding(.bottom, 30)
-            
-            Image(foodArr[foodIndex].image)
-                .resizable()
-                .frame(width: 450, height: 300)
-                .padding(.bottom, 30)
+    
+            VStack {
+                Image(food.image)
+                    .resizable()
+                    .frame(width: 550, height: 350)
+                
+//                Link("Designed by Freepik", destination: URL(string: "https://www.freepik.com")!)
+            }
+            .padding(.bottom, 30)
 
-            Text(foodArr[foodIndex].description)
-                .frame(width: 500, height: .infinity, alignment: .center)
+            Text(food.description)
+                .font(.system(size: 23))
+                .frame(width: 550)
+                .multilineTextAlignment(.center)
                 .padding(.bottom, 30)
             
             HStack {
                 Button(action: {
-                    print("Prev")
+                    if foodIndex > 0 {
+                        foodIndex -= 1
+                    } else {
+                        foodIndex = 4
+                    }
+                    
                 }, label: {
                     Text("Prev")
+                        .font(.title)
                         .foregroundColor(Color("textColor"))
                 })
                 .padding(EdgeInsets(top: 20, leading: 90, bottom: 20, trailing: 90))
                 .background(Color("buttonColor"))
                 .cornerRadius(15)
-                .padding(.trailing, 50)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color("textColor"), lineWidth: 5)
+                )
+                .padding(.trailing, 30)
                 
-                Button("Next") {
-                    print("Next")
-                }
+                Button(action: {
+                    foodIndex += 1
+                }, label: {
+                    Text("Next")
+                        .font(.title)
+                        .foregroundColor(Color("textColor"))
+                })
                 .padding(EdgeInsets(top: 20, leading: 90, bottom: 20, trailing: 90))
                 .background(Color("buttonColor"))
                 .foregroundColor(Color("textColor"))
                 .cornerRadius(15)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color("textColor"), lineWidth: 5)
+                )
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Color("gorenganColor"))
     }
 }

@@ -10,32 +10,36 @@ struct ContentView: View {
                     .resizable()
                     .frame(width: 350, height: 190)
                 
-                Text("ISF Dictionary")
+                Text("My Street Food")
                     .font(.system(size: 64))
                     .fontWeight(.bold)
                     .foregroundColor(Color("textColor"))
                     .padding(.bottom)
                 
-                Text("This is a dictionary made to give information about Indonesia's street food.")
+                Text("This is an app made to give information about Indonesia's street food so people know about the food's look, it's name, and the characteristics.")
                     .font(.system(size: 30))
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 60)
                     .padding(.bottom, 30)
                 
-                NavigationLink(destination: DictionaryView()) {
-                    Button("Start"){
-                        print("Tapped")
-                    }
-                    .font(.title)
-                    .foregroundColor(Color.black)
-                    .padding(EdgeInsets(top: 20, leading: 90, bottom: 20, trailing: 90))
-                    .background(Color("buttonColor"))
-                    .border(Color("textColor"), width: 6)
-                    .cornerRadius(15)
-                }
-                
+                Button(action: {
+                 }) {
+                     NavigationLink(destination: DictionaryView().navigationBarBackButtonHidden(true)) {
+                     Text("Start")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color("textColor"))
+                     }
+                 }
+                 .padding(EdgeInsets(top: 25, leading: 120, bottom: 25, trailing: 120))
+                 .background(Color("buttonColor"))
+                 .cornerRadius(15)
+                 .overlay(
+                     RoundedRectangle(cornerRadius: 15)
+                         .stroke(Color("textColor"), lineWidth: 5)
+                 )
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .background(Color("gorenganColor"))
         }
         .navigationViewStyle(StackNavigationViewStyle())

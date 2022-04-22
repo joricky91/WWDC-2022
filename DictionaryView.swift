@@ -8,78 +8,131 @@
 import Foundation
 import SwiftUI
 
+var width: CGFloat {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        return UIScreen.main.bounds.width * 0.63
+    } else {
+        return UIScreen.main.bounds.width * 0.63
+    }
+}
+
+var height: CGFloat {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        return UIScreen.main.bounds.height * 0.3
+    } else {
+        return UIScreen.main.bounds.height * 0.1
+    }
+}
+
+var buttonWidth: CGFloat {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        return UIScreen.main.bounds.width * 0.28
+    } else {
+        return UIScreen.main.bounds.width * 0.2
+    }
+}
+
+var buttonHeight: CGFloat {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        return UIScreen.main.bounds.height * 0.06
+    } else {
+        return UIScreen.main.bounds.height * 0.1
+    }
+}
+
 struct DictionaryView: View {
     @State private var foodIndex = 0
+    @State var showView = false
     
     var food: FoodModel {
         foodArr[foodIndex]
     }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                Text(food.name)
-                    .font(.system(size: 82))
-                    .fontWeight(.semibold)
-                    .padding(.bottom, 30)
-        
+        GeometryReader { geometry in
+            ScrollView(showsIndicators: false) {
                 VStack {
-                    Image(food.image)
-                        .resizable()
-                        .frame(width: 550, height: 350)
-                    
-    //                Link("Designed by Freepik", destination: URL(string: "https://www.freepik.com")!)
-                }
-                .padding(.bottom, 30)
-
-                Text(food.description)
-                    .font(.system(size: 23))
-                    .frame(width: 550)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 30)
-                
-                HStack {
-                    Button(action: {
-                        if foodIndex > 0 {
-                            foodIndex -= 1
-                        } else {
-                            foodIndex = 4
-                        }
+                    Text(food.name)
+                        .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.1))
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 30)
+            
+                    VStack {
+                        Image(food.image)
+                            .resizable()
+                            .frame(width: width, height: height)
+                            .cornerRadius(15)
                         
-                    }, label: {
-                        Text("Prev")
-                            .font(.title)
-                            .foregroundColor(Color("textColor"))
-                    })
-                    .padding(EdgeInsets(top: 20, leading: 90, bottom: 20, trailing: 90))
-                    .background(Color("buttonColor"))
-                    .cornerRadius(15)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color("textColor"), lineWidth: 5)
-                    )
-                    .padding(.trailing, 30)
+                        Link(food.imageFrom, destination: URL(string: food.urlImage)!)
+                            .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.027))
+                            .foregroundColor(Color("darkBrown"))
+                    }
+                    .padding(.bottom, 20)
+
+                    Text(food.description)
+                        .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.03))
+                        .frame(width: width)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 30)
                     
-                    Button(action: {
-                        foodIndex += 1
-                    }, label: {
-                        Text("Next")
-                            .font(.title)
-                            .foregroundColor(Color("textColor"))
-                    })
-                    .padding(EdgeInsets(top: 20, leading: 90, bottom: 20, trailing: 90))
-                    .background(Color("buttonColor"))
-                    .foregroundColor(Color("textColor"))
-                    .cornerRadius(15)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color("textColor"), lineWidth: 5)
-                    )
+                    HStack {
+                        Button(action: {
+                            if foodIndex > 0 {
+                                foodIndex -= 1
+                            } else {
+                                foodIndex = 4
+                            }
+                            
+                        }, label: {
+                            Text("Prev")
+                                .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.03))
+                                .foregroundColor(Color("textColor"))
+                        })
+                        .frame(width: buttonWidth, height: buttonHeight)
+                        .background(Color("buttonColor"))
+                        .cornerRadius(15)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color("textColor"), lineWidth: 5)
+                        )
+                        .padding(.trailing, 30)
+                        
+                        Button(action: {
+                            if foodIndex < 4 {
+                                foodIndex += 1
+                            } else if foodIndex >= 4 {
+                                self.showView = true
+                            }
+                            
+                        }, label: {
+                            Text("Next")
+                                .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.03))
+                                .foregroundColor(Color("textColor"))
+                        })
+                        .frame(width: buttonWidth, height: buttonHeight)
+                        .background(Color("buttonColor"))
+                        .foregroundColor(Color("textColor"))
+                        .cornerRadius(15)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color("textColor"), lineWidth: 5)
+                        )
+                    }
                 }
+                .frame(width: geometry.size.width)
+                .frame(minHeight: geometry.size.height)
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .padding(.top, 1)
+            .background(Color("gorenganColor"))
+            .background(
+                NavigationLink(destination: EndScreen().navigationBarBackButtonHidden(true), isActive: $showView) {}
+            )
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.top, 1)
-        .background(Color("gorenganColor"))
     }
+
 }
+
+

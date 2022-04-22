@@ -8,38 +8,6 @@
 import Foundation
 import SwiftUI
 
-var width: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIScreen.main.bounds.width * 0.63
-    } else {
-        return UIScreen.main.bounds.width * 0.63
-    }
-}
-
-var height: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIScreen.main.bounds.height * 0.3
-    } else {
-        return UIScreen.main.bounds.height * 0.1
-    }
-}
-
-var buttonWidth: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIScreen.main.bounds.width * 0.28
-    } else {
-        return UIScreen.main.bounds.width * 0.2
-    }
-}
-
-var buttonHeight: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIScreen.main.bounds.height * 0.06
-    } else {
-        return UIScreen.main.bounds.height * 0.1
-    }
-}
-
 struct DictionaryView: View {
     @State private var foodIndex = 0
     @State var showView = false
@@ -63,6 +31,7 @@ struct DictionaryView: View {
                             .frame(width: min(geometry.size.width, geometry.size.height) * 0.63, height: min(geometry.size.width, geometry.size.height) * 0.4)
                             .cornerRadius(15)
                         
+                        // Attribution to creator
                         Link(food.imageFrom, destination: URL(string: food.urlImage)!)
                             .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.027))
                             .foregroundColor(Color("darkBrown"))

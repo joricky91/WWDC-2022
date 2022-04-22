@@ -1,21 +1,5 @@
 import SwiftUI
 
-var startButtonWidth: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIScreen.main.bounds.width * 0.35
-    } else {
-        return UIScreen.main.bounds.width * 0.2
-    }
-}
-
-var startButtonHeight: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIScreen.main.bounds.height * 0.08
-    } else {
-        return UIScreen.main.bounds.height * 0.1
-    }
-}
-
 struct ContentView: View {
     @State var showPage = false
     

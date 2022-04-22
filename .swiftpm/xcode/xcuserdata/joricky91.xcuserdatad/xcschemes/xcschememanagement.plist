@@ -27,6 +27,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>My Streetfood</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>WWDC Project</key>
 		<dict>
 			<key>primary</key>

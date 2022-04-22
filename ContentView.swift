@@ -25,7 +25,7 @@ struct ContentView: View {
                 VStack {
                     Image("foodIcon")
                         .resizable()
-                        .frame(width: 350, height: 190)
+                        .frame(width: min(geo.size.width, geo.size.height) * 0.5, height: min(geo.size.width, geo.size.height) * 0.27)
                     
                     Text("My Street Food")
                         .font(.system(size: min(geo.size.width, geo.size.height) * 0.08))

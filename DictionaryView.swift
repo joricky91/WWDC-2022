@@ -60,7 +60,7 @@ struct DictionaryView: View {
                     VStack {
                         Image(food.image)
                             .resizable()
-                            .frame(width: width, height: height)
+                            .frame(width: min(geometry.size.width, geometry.size.height) * 0.63, height: min(geometry.size.width, geometry.size.height) * 0.4)
                             .cornerRadius(15)
                         
                         Link(food.imageFrom, destination: URL(string: food.urlImage)!)

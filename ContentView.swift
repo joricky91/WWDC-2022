@@ -17,7 +17,7 @@ struct ContentView: View {
                         .foregroundColor(Color("textColor"))
                         .padding(.bottom)
                     
-                    Text("This is an app made to give information about Indonesia's street food so people know about the food's look, it's name, and the characteristics.")
+                    Text("This is an app made to give information about Indonesia's street food so people know about the food's look, its name, and its characteristics.")
                         .font(.system(size: min(geo.size.width, geo.size.height) * 0.035))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 60)

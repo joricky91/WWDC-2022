@@ -29,7 +29,7 @@ struct DictionaryView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     Text(food.name)
-                        .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.1))
+                        .font(.system(size: min(geometry.size.width, geometry.size.height) * 0.09))
                         .fontWeight(.semibold)
                         .padding(.bottom, 30)
             

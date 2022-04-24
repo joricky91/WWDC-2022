@@ -16,6 +16,14 @@ struct DictionaryView: View {
         foodArr[foodIndex]
     }
     
+    var buttonStatus: Bool {
+        if foodIndex == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView(showsIndicators: false) {
@@ -65,11 +73,12 @@ struct DictionaryView: View {
                                 .stroke(Color("textColor"), lineWidth: 5)
                         )
                         .padding(.trailing, 30)
+                        .disabled(buttonStatus)
                         
                         Button(action: {
-                            if foodIndex < 4 {
+                            if foodIndex < 7 {
                                 foodIndex += 1
-                            } else if foodIndex >= 4 {
+                            } else if foodIndex >= 7 {
                                 self.showView = true
                             }
                             
